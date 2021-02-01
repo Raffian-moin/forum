@@ -1,0 +1,126 @@
+@import url('https://fonts.googleapis.com/css2?family=Lato&display=swap');
+
+body{
+  overflow-x: hidden;
+  font-family: 'Lato', sans-serif;
+  color:#505962;
+}
+/*======navigation======*/
+a{
+  color: black;
+}
+a:link {
+  text-decoration: none;
+}
+a:hover {
+  text-decoration: none;
+}
+.form-rounded{
+  border-radius: 1rem;
+}
+
+.mycustom {
+    position: relative;
+}
+/*.mycustom input[type=text] {
+    border: none;
+    width: 100%;
+    padding-right: 123px;
+}*/
+.mycustom .input-group-prepend {
+    position: absolute;
+    right: 4px;
+    top: 4px;
+    bottom: 4px;z-index:9;
+}
+
+.avatar {
+  max-height:30px;
+  width:auto;
+  vertical-align:middle;
+}
+.ask a{
+  color: white;
+}
+.navbar-nav li{
+  padding-right: .7rem;
+}
+svg.svg-inline--fa{
+  color:#1EBBA3;
+}
+/*======navigation======*/
+
+
+/*======main section======*/
+
+ul li{
+  list-style-type: none;
+}
+
+.Category{
+  margin-left: 2.5rem;
+}
+/*question list section title link*/
+a{
+  color: black;
+}
+a:link {
+  text-decoration: none;
+}
+a:hover {
+  text-decoration: none;
+}
+
+/*trending section*/
+.trending{
+  margin-bottom: 0;
+}
+/*======main section=======*/
+
+
+
+/*============ BOOTSTRAP BREAK POINTS:
+
+Extra small (xs) devices (portrait phones, less than 576px)
+No media query since this is the default in Bootstrap
+
+Small (sm) devices (landscape phones, 576px and up)
+@media (min-width: 576px) { ... }
+
+Medium (md) devices (tablets, 768px and up)
+@media (min-width: 768px) { ... }
+
+Large (lg) devices (desktops, 992px and up)
+@media (min-width: 992px) { ... }
+
+Extra (xl) large devices (large desktops, 1200px and up)
+@media (min-width: 1200px) { ... }
+
+=============*/
+
+.question-form{
+	border:1px solid #e2e7ec;
+}
+#panel, #flip {
+  padding: 5px;
+  text-align: center;
+  background-color: #e5eecc;
+  border: solid 1px #c3c3c3;
+}
+#panel {
+  padding: 50px;
+  display: none;
+}
+
+.question-section svg.svg-inline--fa{
+  margin-left: .5rem;
+  color:#1EBBA3;
+}
+.question-section svg-inline--fa:hover{
+  color:white;
+}
+
+.user img{
+  width:100%;
+  border-radius: 50%;
+}
