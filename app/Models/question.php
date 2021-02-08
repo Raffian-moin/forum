@@ -11,7 +11,7 @@ class question extends Model
     public function answers(){
         return $this->hasMany(answer::class);
     }
-    public function categories(){
-        return $this->hasMany(category::class);
+    public function category(){
+        return $this->belongsTo(category::class);
     }
 }

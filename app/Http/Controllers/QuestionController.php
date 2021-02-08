@@ -14,7 +14,8 @@ class QuestionController extends Controller
      */
     public function index()
     {
-        return question::all();
+        $questions=question::with(['answers','category'])->withCount(['answers','category'])->get();
+        return $questions;
         return "success";
     }
 
@@ -34,14 +35,17 @@ class QuestionController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request){   // {   $flight = question::create([
-    //     'name' => 'London to Paris',
-    // ]);
+    public function store(Request $request){
+        $validated = $request->validate([
+        'title' => 'required|max:255',
+        'description' => 'required',
+        'selectedCategory'=>'required'
+        ]);
         $question = new question();
         $question->title=$request->title;
         $question->description=$request->description;
-        $question->category_id=$request->category_id;
-        $question->user_id=$request->user_id;
+        $question->category_id=$request->selectedCategory;
+        $question->user_id=1;
         $question->save();
         return "success";
 

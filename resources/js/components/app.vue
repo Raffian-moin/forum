@@ -33,16 +33,17 @@
   </div>
 </nav>
 </div>
+
 <!-- end navigation -->
 
 <!-- start main section -->
 <div id="main-section">
 	<div class="row">
 		<div class="col-md-2">
-			<categoty/>
+			<category/>
 		</div>
         <div class="col-md-7">
-            <all-question/>	
+            <router-view></router-view>
 		</div>
 		<div class="col-md-3">
 			<trending/>
@@ -57,16 +58,14 @@
 </template>
 
 <script>
-// import AllQuestion from './allQuestion';
-import AllQuestion from './allQuestion.vue';
-import Categoty from './categoty.vue';
-import Trending from './trending.vue';
+import Category from '../components/category'
+import Trending from '../components/trending'
 
 export default {
     components:{
-        AllQuestion,
-        Categoty,
-        Trending,
+        Category,
+        Trending
+        
     },
 }
 </script>

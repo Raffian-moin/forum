@@ -2,7 +2,7 @@
     <div>
         <h5 class="Category">Category</h5>
 			<ul>
-				<li v-for="(category,index) in categories" :key="index"><a href="">{{category.category}}</a></li>
+				<li v-for="(category,index) in categories" :key="index"><router-link to="/answer">{{category.categoryName}}</router-link></li>
 			</ul>
     </div>
 </template>

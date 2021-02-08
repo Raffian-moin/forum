@@ -9,8 +9,8 @@ class category extends Model
 {
     use HasFactory;
 
-    public function question(){
-        return $this->belongsTo(question::class);
+    public function questions(){
+        return $this->hasMany(question::class);
     }
 
 }

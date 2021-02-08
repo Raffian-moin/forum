@@ -25,7 +25,7 @@
     </head>
     <body class="antialiased">
         <div id="app">
-        <index></index>
+        <app></app>
         </div>
         <script src="{{mix('js/app.js')}}"></script>
         <script src="js/jquery-3.3.1.min.js"></script>

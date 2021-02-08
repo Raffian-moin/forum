@@ -2,6 +2,7 @@
 use App\Http\Controllers\AnswerController;
 use App\Http\Controllers\QuestionController;
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\api\authController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -20,8 +21,10 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-Route::resource('question',QuestionController::class);
+Route::resource('question',QuestionController::class)->middleware('auth:api');
 // Route::resource('qs/{id}',QuestionController::class);
-Route::resource('answer',AnswerController::class);
-Route::resource('category',CategoryController::class);
+Route::resource('answer',AnswerController::class)->middleware('auth:api');
+Route::resource('category',CategoryController::class)->middleware('auth:api');
+Route::post('/register', [authController::class,'register']);
+Route::post('/login', [authController::class,'login']);
 
