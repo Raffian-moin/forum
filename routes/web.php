@@ -4,6 +4,8 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AnswerController;
 use App\Http\Controllers\QuestionController;
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\LikeController;
+
 
 
 /*
@@ -22,6 +24,8 @@ Route::get('/', function () {
 });
 
 Route::resource('question',QuestionController::class);
+// Route::resource('qs/{id}',QuestionController::class);
 Route::resource('answer',AnswerController::class);
 Route::resource('category',CategoryController::class);
+Route::resource('like',LikeController::class);
 

@@ -23,7 +23,8 @@
       <div class="col-12 title">
         <p>{{answer.answerBody}}</p>
         <small>{{distanceFromNow(answer.created_at)}}</small><br>
-        <a href=""><i class="fas fa-thumbs-up"></i>{{answer.likes_count}}</a>
+        <a href="" @click.prevent=like(answer.id)><i class="fas fa-thumbs-up"></i>{{answer.likes_count}}</a>
+        <!-- <button @click=like(answer.id)><i class="fas fa-thumbs-up"></i>{{answer.likes_count}}</button> -->
         <a href=""><i class="fas fa-thumbs-down"></i> 4 </a>
       </div>
     </div>
@@ -45,6 +46,9 @@ export default {
             AnswerData:{
             answerBody:'',
             id:''
+            },
+            likeData:{
+              answerId:''
             }
         }
     },
@@ -52,12 +56,43 @@ export default {
       distanceFromNow(date) {
          return moment(date,"YYYYMMDD").fromNow()
       },
-      addAnswer(id){
+      like(id){
+        this.likeData.answerId=id
+        axios.post('/like',this.likeData)
+  .then((response) =>{
+    if(response.status==200){
+      this.getQuestion();
+    }
+  })
+  .catch(function (error) {
+    // handle error
+    console.log(error);
+  })
+  .then(function () {
+    // always executed
+  });
+      },
+      getQuestion(){
+        axios.get("/question/" +this.$route.params.id)
+    .then((response) =>{
+	this.questions=response.data;
+    console.log(this.questions);
+  })
+  .catch(function (error) {
+    // handle error
+    console.log(error);
+  })
+  .then(function () {
+    // always executed
+  });
+},
+addAnswer(id){
         this.AnswerData.id=id;
         axios.post('/answer',this.AnswerData)
   .then((response) =>{
     if(response.status==200){
       this.AnswerData.answerBody=''
+      this.getQuestion();
     }
   })
   .catch(function (error) {
@@ -70,18 +105,7 @@ export default {
       }
     },
     created() {
-    axios.get("/question/" +this.$route.params.id)
-    .then((response) =>{
-	this.questions=response.data;
-    console.log(this.questions);
-  })
-  .catch(function (error) {
-    // handle error
-    console.log(error);
-  })
-  .then(function () {
-    // always executed
-  });
-}
+    this.getQuestion();
+    }
 }
 </script>

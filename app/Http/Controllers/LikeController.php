@@ -35,7 +35,11 @@ class LikeController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $like=new like();
+        $like->answer_id=$request->answerId;
+        $like->user_id=2;
+        $like->save();
+        return "success";
     }
 
     /**

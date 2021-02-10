@@ -1,9 +1,12 @@
 <template>
 <div id="navigation">
 	<nav class="navbar navbar-expand-md navbar-light bg-light">
-  <a class="navbar-brand" href="#">
+  <!-- <a class="navbar-brand" href="#">
 	<img src="yahoo.png" width="30" height="30" alt="">
-  </a>
+  </a> -->
+  <router-link to="/" class="navbar-brand">
+  <img src="yahoo.png" width="30" height="30" alt="">
+  </router-link>
 
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav">
     <span class="navbar-toggler-icon"></span>

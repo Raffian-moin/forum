@@ -1884,6 +1884,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   name: 'answer',
@@ -1893,6 +1894,9 @@ __webpack_require__.r(__webpack_exports__);
       AnswerData: {
         answerBody: '',
         id: ''
+      },
+      likeData: {
+        answerId: ''
       }
     };
   },
@@ -1900,13 +1904,41 @@ __webpack_require__.r(__webpack_exports__);
     distanceFromNow: function distanceFromNow(date) {
       return moment__WEBPACK_IMPORTED_MODULE_0___default()(date, "YYYYMMDD").fromNow();
     },
-    addAnswer: function addAnswer(id) {
+    like: function like(id) {
       var _this = this;
+
+      this.likeData.answerId = id;
+      axios.post('/like', this.likeData).then(function (response) {
+        if (response.status == 200) {
+          _this.getQuestion();
+        }
+      })["catch"](function (error) {
+        // handle error
+        console.log(error);
+      }).then(function () {// always executed
+      });
+    },
+    getQuestion: function getQuestion() {
+      var _this2 = this;
+
+      axios.get("/question/" + this.$route.params.id).then(function (response) {
+        _this2.questions = response.data;
+        console.log(_this2.questions);
+      })["catch"](function (error) {
+        // handle error
+        console.log(error);
+      }).then(function () {// always executed
+      });
+    },
+    addAnswer: function addAnswer(id) {
+      var _this3 = this;
 
       this.AnswerData.id = id;
       axios.post('/answer', this.AnswerData).then(function (response) {
         if (response.status == 200) {
-          _this.AnswerData.answerBody = '';
+          _this3.AnswerData.answerBody = '';
+
+          _this3.getQuestion();
         }
       })["catch"](function (error) {
         // handle error
@@ -1916,16 +1948,7 @@ __webpack_require__.r(__webpack_exports__);
     }
   },
   created: function created() {
-    var _this2 = this;
-
-    axios.get("/question/" + this.$route.params.id).then(function (response) {
-      _this2.questions = response.data;
-      console.log(_this2.questions);
-    })["catch"](function (error) {
-      // handle error
-      console.log(error);
-    }).then(function () {// always executed
-    });
+    this.getQuestion();
   }
 });
 
@@ -2152,6 +2175,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
+//
+//
+//
 //
 //
 //
@@ -41910,10 +41936,22 @@ var render = function() {
                       ]),
                       _c("br"),
                       _vm._v(" "),
-                      _c("a", { attrs: { href: "" } }, [
-                        _c("i", { staticClass: "fas fa-thumbs-up" }),
-                        _vm._v(_vm._s(answer.likes_count))
-                      ]),
+                      _c(
+                        "a",
+                        {
+                          attrs: { href: "" },
+                          on: {
+                            click: function($event) {
+                              $event.preventDefault()
+                              return _vm.like(answer.id)
+                            }
+                          }
+                        },
+                        [
+                          _c("i", { staticClass: "fas fa-thumbs-up" }),
+                          _vm._v(_vm._s(answer.likes_count))
+                        ]
+                      ),
                       _vm._v(" "),
                       _vm._m(0, true)
                     ])
@@ -42207,9 +42245,13 @@ var render = function() {
       "nav",
       { staticClass: "navbar navbar-expand-md navbar-light bg-light" },
       [
-        _vm._m(0),
+        _c("router-link", { staticClass: "navbar-brand", attrs: { to: "/" } }, [
+          _c("img", {
+            attrs: { src: "yahoo.png", width: "30", height: "30", alt: "" }
+          })
+        ]),
         _vm._v(" "),
-        _vm._m(1),
+        _vm._m(0),
         _vm._v(" "),
         _c(
           "div",
@@ -42218,7 +42260,7 @@ var render = function() {
             attrs: { id: "navbarNav" }
           },
           [
-            _vm._m(2),
+            _vm._m(1),
             _vm._v(" "),
             _c("ul", { staticClass: "navbar-nav ml-auto" }, [
               _c(
@@ -42240,27 +42282,18 @@ var render = function() {
                 1
               ),
               _vm._v(" "),
-              _vm._m(3),
+              _vm._m(2),
               _vm._v(" "),
-              _vm._m(4)
+              _vm._m(3)
             ])
           ]
         )
-      ]
+      ],
+      1
     )
   ])
 }
 var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("a", { staticClass: "navbar-brand", attrs: { href: "#" } }, [
-      _c("img", {
-        attrs: { src: "yahoo.png", width: "30", height: "30", alt: "" }
-      })
-    ])
-  },
   function() {
     var _vm = this
     var _h = _vm.$createElement
