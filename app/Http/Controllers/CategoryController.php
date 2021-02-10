@@ -35,7 +35,10 @@ class CategoryController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $category=new category();
+        $category->categoryName=$request->categoryName;
+        $category->slug=$request->slug;
+        $category->save();
     }
 
     /**
@@ -44,7 +47,7 @@ class CategoryController extends Controller
      * @param  \App\Models\category  $category
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show($slug)
     {
         // return category::with(['questions'])->get();
         // return category::with(['questions'])->where('id',$id)->get();
@@ -54,7 +57,7 @@ class CategoryController extends Controller
                   ->orderBy('answers_count', 'desc');
     }])
     ->withCount(['questions'])
-    ->where('id',$id)
+    ->where('slug',$slug)
     ->get();
     }
 

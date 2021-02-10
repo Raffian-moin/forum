@@ -3,8 +3,7 @@
 namespace Database\Factories;
 
 use App\Models\question;
-use App\Models\category;
-use App\Models\User;
+use Illuminate\Support\Str;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 class questionFactory extends Factory
@@ -23,8 +22,13 @@ class questionFactory extends Factory
      */
     public function definition()
     {
+        $title = $this->faker->sentence;
+        $slug =Str::of($title)->slug('-');
+
+
         return [
-            'title' => $this->faker->text,
+            'title' => $title,
+            'slug'=>$slug,
             'description' => $this->faker->realText,
             'category_id' => $this->faker->numberBetween(1,2),
             'user_id' => $this->faker->numberBetween(1,5),

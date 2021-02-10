@@ -11,8 +11,8 @@ Vue.use(VueRouter);
 const routes = [
     { path: '/', component: home},
     {path: '/question',name: 'question',component: Question,},
-    {path: '/question/:id',name: 'answer',component: Answer,props: true,},
-    {path: '/category/:id',name: 'categoryQuestion',component: categoryQuestion,props: true,},
+    {path: '/question/:slug',name: 'answer',component: Answer,props: true,},
+    {path: '/category/:slug',name: 'categoryQuestion',component: categoryQuestion,props: true,},
     // {path: '/answer',name: 'answer',component: Answer}
   ]
   

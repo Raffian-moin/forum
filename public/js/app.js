@@ -1921,7 +1921,7 @@ __webpack_require__.r(__webpack_exports__);
     getQuestion: function getQuestion() {
       var _this2 = this;
 
-      axios.get("/question/" + this.$route.params.id).then(function (response) {
+      axios.get("/question/" + this.$route.params.slug).then(function (response) {
         _this2.questions = response.data;
         console.log(_this2.questions);
       })["catch"](function (error) {
@@ -2093,7 +2093,7 @@ __webpack_require__.r(__webpack_exports__);
   created: function created() {
     var _this = this;
 
-    axios.get('/category/' + this.$route.params.id).then(function (response) {
+    axios.get('/category/' + this.$route.params.slug).then(function (response) {
       _this.categoryWiseQuestions = response.data;
     })["catch"](function (error) {
       // handle error
@@ -2417,12 +2417,12 @@ var routes = [{
   name: 'question',
   component: _components_question_vue__WEBPACK_IMPORTED_MODULE_1__.default
 }, {
-  path: '/question/:id',
+  path: '/question/:slug',
   name: 'answer',
   component: _components_answer_vue__WEBPACK_IMPORTED_MODULE_2__.default,
   props: true
 }, {
-  path: '/category/:id',
+  path: '/category/:slug',
   name: 'categoryQuestion',
   component: _components_categoryQuestion_vue__WEBPACK_IMPORTED_MODULE_3__.default,
   props: true
@@ -42056,7 +42056,10 @@ var render = function() {
               "router-link",
               {
                 attrs: {
-                  to: { name: "categoryQuestion", params: { id: category.id } }
+                  to: {
+                    name: "categoryQuestion",
+                    params: { slug: category.slug }
+                  }
                 }
               },
               [_vm._v(_vm._s(category.categoryName))]
@@ -42112,7 +42115,10 @@ var render = function() {
                       "router-link",
                       {
                         attrs: {
-                          to: { name: "answer", params: { id: question.id } }
+                          to: {
+                            name: "answer",
+                            params: { slug: question.slug }
+                          }
                         }
                       },
                       [_c("h5", [_vm._v(_vm._s(question.title))])]
@@ -42185,7 +42191,10 @@ var render = function() {
                       "router-link",
                       {
                         attrs: {
-                          to: { name: "answer", params: { id: question.id } }
+                          to: {
+                            name: "answer",
+                            params: { slug: question.slug }
+                          }
                         }
                       },
                       [_c("h5", [_vm._v(_vm._s(question.title))])]

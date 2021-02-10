@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\question;
 use Illuminate\Http\Request;
+use Illuminate\Support\Str;
+
 
 class QuestionController extends Controller
 {
@@ -44,6 +46,7 @@ class QuestionController extends Controller
         $question = new question();
         $question->title=$request->title;
         $question->description=$request->description;
+        $question->slug=Str::of($request->title)->slug('-');
         $question->category_id=$request->selectedCategory;
         $question->user_id=1;
         $question->save();
@@ -58,14 +61,14 @@ class QuestionController extends Controller
      * @param  \App\Models\question  $question
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show($slug)
     {
         return Question::with(['answers'=> function ($query) {
             $query->withCount('likes')
                   ->orderBy('likes_count', 'desc');
     }])
     ->withCount(['answers'])
-    ->where('id',$id)
+    ->where('slug',$slug)
     ->get();
     }
 

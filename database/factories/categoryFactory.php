@@ -1,8 +1,8 @@
 <?php
 
 namespace Database\Factories;
-
 use App\Models\category;
+use Illuminate\Support\Str;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 class categoryFactory extends Factory
@@ -20,9 +20,12 @@ class categoryFactory extends Factory
      * @return array
      */
     public function definition()
-    {
+    {   $categoryName=$this->faker->jobTitle;
+        $slug =Str::of($categoryName)->slug('-');
+
         return [
-            'categoryName' => $this->faker->jobTitle,
+            'categoryName' =>$categoryName,
+            'slug'=>$slug
         ];
     }
 }

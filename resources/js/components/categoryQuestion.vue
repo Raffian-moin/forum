@@ -4,7 +4,7 @@
   <li class="list-group-item disabled" v-for="(question,index) in categoryQuestion.questions" :key="index">
   	<div class="row">
   		<div class="col-12 title">
-        <router-link :to="{ name: 'answer', params: { id: question.id}}"> 
+        <router-link :to="{ name: 'answer', params: { slug: question.slug}}"> 
           <h5>{{question.title}}</h5></router-link>
   			<small>{{question.answers_count}} answers</small>&middot; <small>{{question.category.categoryName}}</small> &middot; <small>{{distanceFromNow(question.created_at)}}</small>
   		</div>
@@ -31,7 +31,7 @@ export default {
       },
      },
     created: function () {
-    axios.get('/category/' +this.$route.params.id)
+    axios.get('/category/' +this.$route.params.slug)
   .then((response) =>{
 	this.categoryWiseQuestions=response.data;
   })

@@ -73,7 +73,7 @@ export default {
   });
       },
       getQuestion(){
-        axios.get("/question/" +this.$route.params.id)
+        axios.get("/question/" +this.$route.params.slug)
     .then((response) =>{
 	this.questions=response.data;
     console.log(this.questions);
