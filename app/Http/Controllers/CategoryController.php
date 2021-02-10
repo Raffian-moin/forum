@@ -44,9 +44,18 @@ class CategoryController extends Controller
      * @param  \App\Models\category  $category
      * @return \Illuminate\Http\Response
      */
-    public function show(category $category)
+    public function show($id)
     {
-        //
+        // return category::with(['questions'])->get();
+        // return category::with(['questions'])->where('id',$id)->get();
+        // return category::with('questions')->withCount(['answers'])->where('id',$id)->get();
+        return category::with(['questions'=> function ($query) {
+            $query->with(['category'])->withCount('answers')
+                  ->orderBy('answers_count', 'desc');
+    }])
+    ->withCount(['questions'])
+    ->where('id',$id)
+    ->get();
     }
 
     /**

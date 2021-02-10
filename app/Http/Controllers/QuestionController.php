@@ -60,8 +60,13 @@ class QuestionController extends Controller
      */
     public function show($id)
     {
-        return $question = question::find($id)->answers;
-        return "hjsj";
+        return Question::with(['answers'=> function ($query) {
+            $query->withCount('likes')
+                  ->orderBy('likes_count', 'desc');
+    }])
+    ->withCount(['answers'])
+    ->where('id',$id)
+    ->get();
     }
 
     /**

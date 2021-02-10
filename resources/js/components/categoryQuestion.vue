@@ -1,44 +1,39 @@
 <template>
     <div>
-    <ul class="list-group">
-  <li class="list-group-item disabled" v-for="(question,index) in questions" :key="index">
+    <ul class="list-group" v-for="(categoryQuestion,index) in categoryWiseQuestions" :key="index">
+  <li class="list-group-item disabled" v-for="(question,index) in categoryQuestion.questions" :key="index">
   	<div class="row">
   		<div class="col-12 title">
         <router-link :to="{ name: 'answer', params: { id: question.id}}"> 
           <h5>{{question.title}}</h5></router-link>
-  			<small>{{question.answers_count}} answers</small> &middot; <small>{{question.category.categoryName}}</small> &middot; <small>{{distanceFromNow(question.created_at)}}</small>
+  			<small>{{question.answers_count}} answers</small>&middot; <small>{{question.category.categoryName}}</small> &middot; <small>{{distanceFromNow(question.created_at)}}</small>
   		</div>
   	</div>
   </li>
 </ul>
-  <router-view></router-view>
     </div>
-</template>>
+    
+</template>
 
 <script>
 import moment from 'moment';
-
 export default {
-  components:{
-
-        
-    },
-	name:"home",
-	data(){
+    name:'category',
+    data(){
         return{
-            questions:[]
+            categoryWiseQuestions:[]
         }
     },
-    methods: {
+     methods: {
 
             distanceFromNow(date) {
          return moment(date,"YYYYMMDD").fromNow()
       },
-  },
+     },
     created: function () {
-    axios.get('/question')
+    axios.get('/category/' +this.$route.params.id)
   .then((response) =>{
-	this.questions=response.data;
+	this.categoryWiseQuestions=response.data;
   })
   .catch(function (error) {
     // handle error

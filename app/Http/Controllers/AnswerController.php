@@ -37,8 +37,8 @@ class AnswerController extends Controller
     {
         $answer = new answer();
         $answer->answerBody=$request->answerBody;
-        $answer->user_id=$request->user_id;
-        $answer->question_id=$request->question_id;
+        $answer->user_id=2;
+        $answer->question_id=$request->id;
         $answer->save();
         return "success";
     }

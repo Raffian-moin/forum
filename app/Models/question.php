@@ -14,4 +14,19 @@ class question extends Model
     public function category(){
         return $this->belongsTo(category::class);
     }
+
+    // public function likes()
+    // {
+    //     return $this->hasManyThrough(like::class, answer::class);
+    // }
+
+    // public function getDataAttribute()
+    // {
+    //     return [
+    //         'question' => $this,
+    //         'answers' => $this->answers()->get(),
+    //         'answer_count' => $this->answers()->get()->count(),
+    //         'likes' => $this->answers()->likes()->get(),
+    //     ];
+    // }
 }
